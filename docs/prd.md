@@ -173,13 +173,16 @@ LMS(수강·강의·평가)는 2단계로 분리한다. `CLAUDE.md` 규칙에 �
 
 ## 10. 릴리스 계획 (마일스톤)
 
-| 단계 | 산출물 | 완료 기준 |
-|---|---|---|
-| M0 설계 확정 | 이 PRD + 설계 문서 | §12 미결정 사항 확정 |
-| M1 데이터 계층 | `inquiries` 마이그레이션(+RLS), `src/lib`(validators·queries·mutations) | 타입 체크 통과, RLS 존재 |
-| M2 공개 사이트 | 소개·과정·입학·문의 폼·완료·약관 | 문의 제출 E2E 동작 |
-| M3 관리자 | 로그인·목록·상세·상태변경 | 인증자만 열람 확인 |
-| M4 QA·배포 | Preview 검수 → Production | 시크릿 노출 0, lib 우회 0 |
+| 단계 | 산출물 | 완료 기준 | 상태 |
+|---|---|---|---|
+| M0 설계 확정 | 이 PRD + 설계 문서 | §12 미결정 사항 확정 | ✅ 2026-07-23 |
+| M1 데이터 계층 | `inquiries` 마이그레이션(+RLS), `src/lib`(validators·queries·mutations) | 타입 체크 통과, RLS 존재 | ✅ |
+| M2 공개 사이트 | 소개·과정·입학·문의 폼·완료·약관 | 문의 제출 E2E 동작 | ✅ 실제 DB 저장까지 확인 |
+| M3 관리자 | 로그인·목록·상세·상태변경 | 인증자만 열람 확인 | ✅ 로그인·목록·상태변경 확인 |
+| M4 QA·배포 | Preview 검수 → Production | 시크릿 노출 0, lib 우회 0 | 🔶 QA 완료 · 배포는 계정 작업 |
+
+M4 의 배포 절차와 배포 후 검증 항목은 [`docs/deploy.md`](./deploy.md) 에 있다. Vercel 프로젝트
+연결과 키 발급은 계정 소유자만 할 수 있어 런북으로 남겼다.
 
 ---
 
@@ -235,3 +238,4 @@ LMS 확장 시 도입 예정: `programs`·`courses`·`enrollments` 등 도메인
 
 - [`CLAUDE.md`](../CLAUDE.md) — 저장소 규칙(기술 스택·데이터 접근·보안·언어)
 - [`docs/phase1-design.md`](./phase1-design.md) — 사이트 구조·User Flow·기술 스택 설계
+- [`docs/deploy.md`](./deploy.md) — 배포 런북·환경 변수·배포 후 검증

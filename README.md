@@ -56,3 +56,4 @@ docs/           # 설계 문서 (PRD, Phase 1 설계)
 - [`CLAUDE.md`](./CLAUDE.md) — 저장소 규칙
 - [`docs/prd.md`](./docs/prd.md) — 제품 요구사항
 - [`docs/phase1-design.md`](./docs/phase1-design.md) — 사이트 구조·User Flow·기술 스택
+- [`docs/deploy.md`](./docs/deploy.md) — 배포 런북·환경 변수·배포 후 검증
