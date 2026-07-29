@@ -4,8 +4,15 @@
  * 색 토큰. 화면에서는 Tailwind 유틸리티(bg-surface, text-muted …)로만 쓰고
  * 인라인 style 은 쓰지 않는다 (CLAUDE.md §2).
  * 대비는 본문 기준 4.5:1 이상을 목표로 잡았다 (PRD §9 접근성).
+ *
+ * **라이트 테마 고정.** OS 다크모드를 따라가면 보는 사람마다 화면이 달라져
+ * 홍보 사이트의 인상이 일정하지 않다. `color-scheme: light` 는 셀렉트·날짜
+ * 입력·스크롤바 같은 브라우저 기본 UI 까지 라이트로 고정한다 — 이게 없으면
+ * OS 가 다크일 때 관리자 필터의 날짜 입력만 검게 나온다.
  */
 :root {
+  color-scheme: light;
+
   --background: #ffffff;
   --foreground: #16181d;
   --muted: #565d6b;
@@ -43,27 +50,6 @@
   --color-success-surface: var(--success-surface);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0d0f13;
-    --foreground: #ecedf0;
-    --muted: #a6adba;
-    --surface: #161a20;
-    --surface-strong: #1e232b;
-    --border: #2a3038;
-    --brand: #8fb0f2;
-    --brand-strong: #b3c9f7;
-    --brand-surface: #182034;
-    --brand-foreground: #0d0f13;
-    --danger: #f2b8b5;
-    --danger-surface: #2a1917;
-    --warning: #f5c77e;
-    --warning-surface: #2a2116;
-    --success: #93d5ac;
-    --success-surface: #16241c;
-  }
 }
 
 body {
