@@ -14,8 +14,14 @@ import { getSupabaseEnv } from './env'
  * 이 함수를 사용한다 (CLAUDE.md §4).
  */
 export async function createSupabaseServerClient() {
-  const { url, anonKey } = getSupabaseEnv()
+  // `cookies()` 를 먼저 부른다. 이 호출이 "이 페이지는 요청 시점에 렌더한다"는
+  // 신호라서, 빌드의 프리렌더 단계는 여기서 빠져나간다.
+  //
+  // 순서를 바꿔 환경 변수 검사가 앞에 오면, 빌드 환경에 변수가 없을 때 그 예외가
+  // 프리렌더 도중 터져 빌드 전체가 실패한다. 실제로 Vercel 첫 배포가 이렇게 깨졌다.
+  // 런타임에 변수가 없으면 여전히 아래에서 예외가 나며, 그게 맞는 동작이다.
   const cookieStore = await cookies()
+  const { url, anonKey } = getSupabaseEnv()
 
   return createServerClient<Database>(url, anonKey, {
     cookies: {
