@@ -18,6 +18,10 @@
   --brand-foreground: #ffffff;
   --danger: #b3261e;
   --danger-surface: #fdeceb;
+  --warning: #8a5300;
+  --warning-surface: #fdf1dd;
+  --success: #1a6b3c;
+  --success-surface: #e6f4ec;
 }
 
 @theme inline {
@@ -33,6 +37,10 @@
   --color-brand-foreground: var(--brand-foreground);
   --color-danger: var(--danger);
   --color-danger-surface: var(--danger-surface);
+  --color-warning: var(--warning);
+  --color-warning-surface: var(--warning-surface);
+  --color-success: var(--success);
+  --color-success-surface: var(--success-surface);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -51,6 +59,10 @@
     --brand-foreground: #0d0f13;
     --danger: #f2b8b5;
     --danger-surface: #2a1917;
+    --warning: #f5c77e;
+    --warning-surface: #2a2116;
+    --success: #93d5ac;
+    --success-surface: #16241c;
   }
 }
 

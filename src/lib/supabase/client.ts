@@ -6,8 +6,10 @@ import { getSupabaseEnv } from './env'
 /**
  * 브라우저용 Supabase 클라이언트.
  *
- * Phase 1 에서는 관리자 로그인(M3, `/login`)의 인증 흐름에만 쓴다.
- * 문의 데이터 읽기·쓰기는 서버 경로(queries/mutations)로만 처리한다.
+ * **현재 사용처 없음.** M3 의 관리자 로그인은 Server Action 으로 처리한다
+ * (`src/lib/mutations/auth.ts`) — 비밀번호를 클라이언트 자바스크립트에서 다루지
+ * 않고 세션 쿠키도 서버가 설정하기 때문이다.
+ * 브라우저에서 직접 Supabase 를 호출해야 할 일이 생기면 이 함수를 쓴다.
  */
 export function createSupabaseBrowserClient() {
   const { url, anonKey } = getSupabaseEnv()
