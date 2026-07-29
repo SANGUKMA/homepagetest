@@ -3,13 +3,15 @@
 대학 소개 + 입학·과정 문의 접수를 위한 웹 서비스 (Phase 1).
 저장소 규칙은 [`CLAUDE.md`](./CLAUDE.md)를 따른다.
 
+**Phase 1 완료 · 배포 운영 중** — https://univhomepagetest.vercel.app
+
 ## 기술 스택
 
 - **Next.js 16** (App Router)
 - **TypeScript** (`strict: true`)
 - **Tailwind CSS v4**
-- (M1 예정) Supabase (Postgres + Auth) · `zod` · `@supabase/ssr`
-- (M4 예정) Vercel 배포
+- **Supabase** (Postgres + Auth · RLS) · `zod` · `@supabase/ssr`
+- **Vercel** 배포 (`main` → Production, PR → Preview)
 
 ## 요구사항
 

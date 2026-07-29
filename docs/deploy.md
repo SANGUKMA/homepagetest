@@ -4,10 +4,14 @@
 
 | 항목 | 값 |
 |---|---|
-| 호스팅 | Vercel |
+| 호스팅 | Vercel — 프로젝트 `univ_homepagetest` |
+| 운영 URL | https://univhomepagetest.vercel.app |
 | DB · 인증 | Supabase — `online-university` (ap-northeast-2) |
 | 브랜치 전략 | `main` = Production · PR = Preview |
-| 작성일 | 2026-07-29 |
+| 최초 배포 | 2026-07-29 |
+
+> Preview 배포 URL 은 Vercel 인증으로 보호된다. 외부에서 열리지 않는 것이 정상이며,
+> Preview 를 외부와 공유하려면 Deployment Protection 설정을 따로 손봐야 한다.
 
 ---
 
