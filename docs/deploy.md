@@ -34,7 +34,7 @@ Vercel → Settings → Environment Variables. **Production 과 Preview 에 각�
 
 | 변수 | 노출 | 필수 | 값 · 비고 |
 |---|---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | CLIENT | ✅ | 배포 도메인. 미설정 시 sitemap·OG 태그가 `localhost` 로 나간다 |
+| `NEXT_PUBLIC_SITE_URL` | CLIENT | ❌ | Vercel 에서는 `VERCEL_PROJECT_PRODUCTION_URL` 로 자동 판별한다(커스텀 도메인 포함). 다른 값을 강제할 때만 넣는다 |
 | `NEXT_PUBLIC_SUPABASE_URL` | CLIENT | ✅ | Supabase 프로젝트 URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | CLIENT | ✅ | 공개 키. RLS 로 보호된다 |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | CLIENT | 운영 ✅ | 없으면 위젯을 띄우지 않는다 |
