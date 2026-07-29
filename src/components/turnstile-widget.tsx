@@ -45,7 +45,9 @@ export function TurnstileWidget({ siteKey }: { siteKey: string }) {
 
     widgetIdRef.current = api.render(containerRef.current, {
       sitekey: siteKey,
-      theme: 'auto',
+      // 사이트가 라이트 고정이므로 위젯도 맞춘다. 'auto' 로 두면 OS 가 다크일 때
+      // 위젯만 검게 떠서 폼 안에서 튄다.
+      theme: 'light',
       language: 'ko',
     })
   }, [siteKey])
