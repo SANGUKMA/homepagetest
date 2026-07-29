@@ -27,23 +27,34 @@ export default function FaqPage() {
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         {FAQ_CATEGORIES.map((category) => (
           <div key={category} className="mb-12 last:mb-0">
-            <h2 className="text-lg font-bold tracking-tight text-brand">
+            <h2 className="font-display text-lg font-bold text-brand">
               {category}
             </h2>
-            <ul className="mt-4 divide-y divide-border border-y border-border">
+            <ul className="mt-5 space-y-3">
               {listFaqByCategory(category).map((item) => (
                 <li key={item.question}>
-                  <details className="group py-4">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">
+                  <details className="group rounded-2xl border border-border px-6 py-5 open:border-brand/40 open:bg-brand-surface/40">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-ink">
                       {item.question}
+                      {/* 원본 디자인의 원형 화살표 버튼 */}
                       <span
                         aria-hidden="true"
-                        className="shrink-0 text-muted transition-transform group-open:rotate-45"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-brand text-brand transition-transform group-open:rotate-180"
                       >
-                        ＋
+                        <svg
+                          viewBox="0 0 16 16"
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="m4 6 4 4 4-4" />
+                        </svg>
                       </span>
                     </summary>
-                    <p className="mt-3 text-sm leading-relaxed text-muted">
+                    <p className="mt-4 text-sm leading-relaxed text-muted">
                       {item.answer}
                     </p>
                   </details>

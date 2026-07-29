@@ -20,7 +20,7 @@ export default function InquiryCompletePage() {
       >
         ✓
       </span>
-      <h1 className="mt-6 text-3xl font-bold tracking-tight">
+      <h1 className="mt-6 font-display text-3xl font-bold text-ink">
         {INQUIRY_COMPLETE.title}
       </h1>
       <p className="mt-4 leading-relaxed text-muted">

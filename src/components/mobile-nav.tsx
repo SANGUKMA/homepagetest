@@ -50,7 +50,7 @@ export function MobileNav() {
       {open ? (
         <div
           id="mobile-nav-panel"
-          className="absolute inset-x-0 top-16 border-b border-border bg-background px-4 pb-4 shadow-sm"
+          className="absolute inset-x-0 top-18 border-b border-border bg-background px-4 pb-4 shadow-sm"
         >
           <nav aria-label="주 메뉴" className="flex flex-col py-2">
             {MAIN_NAV.map((item) => (

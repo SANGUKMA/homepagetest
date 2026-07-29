@@ -12,7 +12,7 @@ export default function NotFoundPage() {
   return (
     <section className="mx-auto flex max-w-2xl flex-col items-center px-4 py-28 text-center sm:px-6">
       <p className="text-sm font-semibold text-brand">404</p>
-      <h1 className="mt-3 text-3xl font-bold tracking-tight">
+      <h1 className="mt-3 font-display text-3xl font-bold text-ink">
         {NOT_FOUND.title}
       </h1>
       <p className="mt-4 text-muted">{NOT_FOUND.description}</p>

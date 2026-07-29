@@ -1,28 +1,44 @@
 @import "tailwindcss";
 
 /*
- * 색 토큰. 화면에서는 Tailwind 유틸리티(bg-surface, text-muted …)로만 쓰고
+ * 색·서체 토큰. 화면에서는 Tailwind 유틸리티(bg-surface, text-muted …)로만 쓰고
  * 인라인 style 은 쓰지 않는다 (CLAUDE.md §2).
- * 대비는 본문 기준 4.5:1 이상을 목표로 잡았다 (PRD §9 접근성).
  *
- * **라이트 테마 고정.** OS 다크모드를 따라가면 보는 사람마다 화면이 달라져
- * 홍보 사이트의 인상이 일정하지 않다. `color-scheme: light` 는 셀렉트·날짜
- * 입력·스크롤바 같은 브라우저 기본 UI 까지 라이트로 고정한다 — 이게 없으면
- * OS 가 다크일 때 관리자 필터의 날짜 입력만 검게 나온다.
+ * 팔레트는 참고 디자인(로열 블루 + 코랄)에서 가져오되 대비를 확인해 조정했다.
+ * 원본 코랄 #E54F6D 는 흰 글씨 대비가 3.7:1 로 기준에 못 미쳐, 색 인상을 유지하는
+ * 선에서 #D63C5B(4.5:1)로 낮췄다 (PRD §9 접근성).
+ *
+ * 라이트 테마 고정. `color-scheme: light` 는 셀렉트·날짜 입력·스크롤바 같은
+ * 브라우저 기본 UI 까지 라이트로 묶는다.
  */
 :root {
   color-scheme: light;
 
   --background: #ffffff;
-  --foreground: #16181d;
-  --muted: #565d6b;
-  --surface: #f5f6f8;
-  --surface-strong: #eceef2;
-  --border: #dfe2e8;
-  --brand: #1d3f8c;
-  --brand-strong: #16326f;
-  --brand-surface: #eaf0fb;
+  --foreground: #0c0c0c;
+  --muted: #5a5f6e;
+  --surface: #f2f2f2;
+  --surface-strong: #e6e7ec;
+  --border: #e3e5ee;
+
+  /* 주 색상 — 히어로·푸터·강조 면 */
+  --brand: #3247c6;
+  --brand-strong: #26379e;
+  --brand-surface: #eef0fc;
   --brand-foreground: #ffffff;
+  /* 파란 면 위의 보조 텍스트 (대비 4.8:1) */
+  --brand-muted: #cad0ee;
+
+  /* 강조 색상 — 주요 행동 버튼 */
+  --accent: #d63c5b;
+  --accent-strong: #c22c4b;
+  --accent-foreground: #ffffff;
+
+  /* 깊은 남색 — 큰 제목 */
+  --ink: #292556;
+  /* 민트 — 장식 전용. 본문 텍스트로 쓰지 않는다(대비 부족) */
+  --mint: #64ccc5;
+
   --danger: #b3261e;
   --danger-surface: #fdeceb;
   --warning: #8a5300;
@@ -42,21 +58,48 @@
   --color-brand-strong: var(--brand-strong);
   --color-brand-surface: var(--brand-surface);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-muted: var(--brand-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ink: var(--ink);
+  --color-mint: var(--mint);
   --color-danger: var(--danger);
   --color-danger-surface: var(--danger-surface);
   --color-warning: var(--warning);
   --color-warning-surface: var(--warning-surface);
   --color-success: var(--success);
   --color-success-surface: var(--success-surface);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* 제목은 세리프, 본문은 산세리프 — 참고 디자인의 대비를 한글로 옮긴 것 */
+  --font-sans: var(--font-noto-sans-kr);
+  --font-serif: var(--font-noto-serif-kr);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), "Pretendard", "Malgun Gothic",
+  font-family: var(--font-noto-sans-kr), "Pretendard", "Malgun Gothic",
     "Apple SD Gothic Neo", system-ui, sans-serif;
+  /* 본문 자간을 살짝 벌려 원본의 여유로운 인상을 낸다. 한글은 라틴보다
+     자간에 민감해 원본(3px)보다 훨씬 작게 잡았다. */
+  letter-spacing: 0.01em;
+}
+
+/* 표시용 제목. 한글 세리프는 굵기 대비가 약해 600 이상에서 인상이 산다. */
+.font-display {
+  font-family: var(--font-noto-serif-kr), "Batang", serif;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+}
+
+/* 한글은 단어 중간에서 줄바꿈되면 읽기 나쁘다. 제목·본문 모두 어절 단위로 끊는다. */
+h1,
+h2,
+h3,
+p,
+li {
+  word-break: keep-all;
 }
 
 /* 키보드 조작 시 초점이 항상 보이도록 한다 (PRD §9 접근성). */

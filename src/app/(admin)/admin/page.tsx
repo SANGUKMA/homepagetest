@@ -64,7 +64,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <h1 className="font-display text-2xl font-bold text-ink">
           {ADMIN.list.title}
         </h1>
         <p className="text-sm text-muted">{ADMIN.list.total(total)}</p>

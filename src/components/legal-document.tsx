@@ -19,7 +19,7 @@ export function LegalDocument({ document }: { document: LegalDocumentContent }) 
         <div className="mt-10 space-y-10">
           {document.sections.map((section) => (
             <section key={section.heading}>
-              <h2 className="text-lg font-bold tracking-tight">
+              <h2 className="font-display text-lg font-bold text-ink">
                 {section.heading}
               </h2>
               {section.paragraphs?.map((paragraph) => (

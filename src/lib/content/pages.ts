@@ -25,6 +25,23 @@ export const HOME = {
     primaryCta: '입학·과정 문의하기',
     secondaryCta: '학위과정 보기',
   },
+  /**
+   * 숫자 강조 블록.
+   *
+   * 여기 적는 값은 전부 `programs.ts`·`admissions.ts` 에서 확인되는 사실이어야 한다.
+   * 과정 수나 일정이 바뀌면 이 값도 같이 고친다.
+   */
+  stats: {
+    title: '숫자로 보는 과정',
+    description:
+      '학위과정 두 개와 단기 수료과정 하나를 운영합니다. 아래 값은 현재 운영 기준입니다.',
+    items: [
+      { value: '3개', label: '운영 중인 과정', trend: false },
+      { value: '연 2회', label: '신입생 모집', trend: false },
+      { value: '16주', label: '최단 수료과정', trend: false },
+      { value: '130학점', label: '학사 졸업 요건', trend: false },
+    ],
+  },
   features: {
     title: '이런 점이 다릅니다',
     description: '재직자가 끝까지 이수할 수 있는 조건을 우선해 설계했습니다.',

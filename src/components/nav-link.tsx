@@ -26,8 +26,10 @@ export function NavLink({ href, label, className = '', onNavigate }: NavLinkProp
       aria-current={isActive ? 'page' : undefined}
       onClick={onNavigate}
       className={[
-        'rounded-md px-3 py-2 text-sm font-medium transition-colors',
-        isActive ? 'text-brand' : 'text-muted hover:text-foreground',
+        'rounded-md px-3 py-2 text-sm transition-colors',
+        isActive
+          ? 'font-medium text-brand'
+          : 'text-foreground/75 hover:text-brand',
         className,
       ]
         .filter(Boolean)

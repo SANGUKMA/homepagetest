@@ -8,7 +8,7 @@ import type { ReactNode } from 'react'
  */
 
 export const inputClasses =
-  'mt-1.5 block w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted/70 focus:border-brand focus:outline-none'
+  'mt-2 block w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted/70 focus:border-brand focus:outline-none'
 
 export const errorInputClasses = 'border-danger focus:border-danger'
 
