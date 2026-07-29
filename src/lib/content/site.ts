@@ -28,11 +28,27 @@ export const SITE = {
 } as const
 
 /**
- * 사이트 절대 URL. 메타데이터(OG 태그)의 기준값으로 쓴다 (PRD §9 SEO).
- * 배포 도메인이 정해지면 `NEXT_PUBLIC_SITE_URL` 로 주입한다 (M4).
+ * 사이트 절대 URL. 메타데이터(OG 태그)·sitemap·robots 의 기준값이다 (PRD §9 SEO).
+ *
+ * 우선순위
+ *   1. `NEXT_PUBLIC_SITE_URL` — 직접 지정할 때만 쓴다
+ *   2. `VERCEL_PROJECT_PRODUCTION_URL` — Vercel 이 넣어 주는 운영 도메인.
+ *      커스텀 도메인을 붙이면 그 값으로 바뀌므로 손댈 일이 없다
+ *   3. 로컬 개발
+ *
+ * 2번이 없으면 sitemap 이 `localhost` 를 가리킨 채로 배포된다. 실제로 첫 배포가
+ * 그랬다. 서버에서만 호출하므로 `NEXT_PUBLIC_` 이 아닌 변수를 읽어도 된다.
  */
 export function getSiteUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL
+  }
+
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  }
+
+  return 'http://localhost:3000'
 }
 
 export type NavItem = {
