@@ -1,21 +1,56 @@
 @import "tailwindcss";
 
+/*
+ * 색 토큰. 화면에서는 Tailwind 유틸리티(bg-surface, text-muted …)로만 쓰고
+ * 인라인 style 은 쓰지 않는다 (CLAUDE.md §2).
+ * 대비는 본문 기준 4.5:1 이상을 목표로 잡았다 (PRD §9 접근성).
+ */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #16181d;
+  --muted: #565d6b;
+  --surface: #f5f6f8;
+  --surface-strong: #eceef2;
+  --border: #dfe2e8;
+  --brand: #1d3f8c;
+  --brand-strong: #16326f;
+  --brand-surface: #eaf0fb;
+  --brand-foreground: #ffffff;
+  --danger: #b3261e;
+  --danger-surface: #fdeceb;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-danger: var(--danger);
+  --color-danger-surface: var(--danger-surface);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0d0f13;
+    --foreground: #ecedf0;
+    --muted: #a6adba;
+    --surface: #161a20;
+    --surface-strong: #1e232b;
+    --border: #2a3038;
+    --brand: #8fb0f2;
+    --brand-strong: #b3c9f7;
+    --brand-surface: #182034;
+    --brand-foreground: #0d0f13;
+    --danger: #f2b8b5;
+    --danger-surface: #2a1917;
   }
 }
 
@@ -24,4 +59,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), "Pretendard", "Malgun Gothic",
     "Apple SD Gothic Neo", system-ui, sans-serif;
+}
+
+/* 키보드 조작 시 초점이 항상 보이도록 한다 (PRD §9 접근성). */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }

@@ -4,6 +4,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import {
   createInquirySchema,
   updateInquiryStatusSchema,
+  type CreateInquiryInput,
 } from '@/lib/validators/inquiry'
 import type { ActionResult } from '@/types/result'
 
@@ -19,8 +20,13 @@ import type { ActionResult } from '@/types/result'
  *
  * RLS 상 anon 은 insert 만 가능하고 select 권한이 없다. 따라서 삽입 후
  * `.select()` 를 붙이지 않는다 — 붙이면 권한 오류가 난다 (설계 문서 §03).
+ *
+ * 성공 시 검증을 통과한 입력을 그대로 돌려준다. 저장된 행을 다시 읽어올 수 없으므로,
+ * 알림 메일(FR-10) 같은 후속 처리는 이 값을 쓴다.
  */
-export async function createInquiry(input: unknown): Promise<ActionResult> {
+export async function createInquiry(
+  input: unknown,
+): Promise<ActionResult<CreateInquiryInput>> {
   const parsed = createInquirySchema.safeParse(input)
 
   if (!parsed.success) {
@@ -31,28 +37,37 @@ export async function createInquiry(input: unknown): Promise<ActionResult> {
     }
   }
 
-  const supabase = await createSupabaseServerClient()
+  try {
+    const supabase = await createSupabaseServerClient()
 
-  const { error } = await supabase.from('inquiries').insert({
-    name: parsed.data.name,
-    email: parsed.data.email,
-    phone: parsed.data.phone,
-    inquiry_type: parsed.data.inquiryType,
-    program_slug: parsed.data.programSlug,
-    message: parsed.data.message,
-    privacy_consent: parsed.data.privacyConsent,
-    // status 는 DB 기본값 'new' 를 쓴다. RLS insert 정책도 'new' 만 허용한다.
-  })
+    const { error } = await supabase.from('inquiries').insert({
+      name: parsed.data.name,
+      email: parsed.data.email,
+      phone: parsed.data.phone,
+      inquiry_type: parsed.data.inquiryType,
+      program_slug: parsed.data.programSlug,
+      message: parsed.data.message,
+      privacy_consent: parsed.data.privacyConsent,
+      // status 는 DB 기본값 'new' 를 쓴다. RLS insert 정책도 'new' 만 허용한다.
+    })
 
-  if (error) {
-    console.error('[mutations/inquiries] createInquiry failed', error)
+    if (error) {
+      console.error('[mutations/inquiries] createInquiry failed', error)
+      return {
+        ok: false,
+        message: '문의 접수에 실패했습니다. 잠시 후 다시 시도해 주세요.',
+      }
+    }
+  } catch (cause) {
+    // 환경 변수 누락 등 예외 상황. 사용자에게는 같은 안내를 주고 원인만 로그로 남긴다.
+    console.error('[mutations/inquiries] createInquiry threw', cause)
     return {
       ok: false,
       message: '문의 접수에 실패했습니다. 잠시 후 다시 시도해 주세요.',
     }
   }
 
-  return { ok: true, data: undefined }
+  return { ok: true, data: parsed.data }
 }
 
 /**
