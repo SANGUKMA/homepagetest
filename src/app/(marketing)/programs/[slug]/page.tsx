@@ -81,7 +81,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
 
         <div className="mt-12 grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="text-xl font-bold tracking-tight">이런 분께 맞습니다</h2>
+            <h2 className="font-display text-xl font-bold text-ink">이런 분께 맞습니다</h2>
             <ul className="mt-4 space-y-2">
               {program.audience.map((item) => (
                 <li key={item} className="flex gap-2 text-sm text-muted">
@@ -94,7 +94,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
             </ul>
           </div>
           <div>
-            <h2 className="text-xl font-bold tracking-tight">과정 특징</h2>
+            <h2 className="font-display text-xl font-bold text-ink">과정 특징</h2>
             <ul className="mt-4 space-y-2">
               {program.highlights.map((item) => (
                 <li key={item} className="flex gap-2 text-sm text-muted">
@@ -109,9 +109,9 @@ export default async function ProgramDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface">
+      <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-          <h2 className="text-2xl font-bold tracking-tight">커리큘럼</h2>
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">커리큘럼</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {program.curriculum.map((term) => (
               <div
@@ -131,7 +131,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <h2 className="text-2xl font-bold tracking-tight">졸업 후 진로</h2>
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">졸업 후 진로</h2>
         <ul className="mt-6 flex flex-wrap gap-2">
           {program.careers.map((career) => (
             <li

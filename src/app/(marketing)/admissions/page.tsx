@@ -21,7 +21,7 @@ export default function AdmissionsPage() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight">지원 자격</h2>
+            <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">지원 자격</h2>
             <ul className="mt-5 space-y-3">
               {ADMISSIONS.eligibility.map((item) => (
                 <li key={item} className="flex gap-3 text-sm leading-relaxed">
@@ -34,7 +34,7 @@ export default function AdmissionsPage() {
             </ul>
           </div>
           <div>
-            <h2 className="text-2xl font-bold tracking-tight">제출 서류</h2>
+            <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">제출 서류</h2>
             <ul className="mt-5 space-y-3">
               {ADMISSIONS.documents.map((item) => (
                 <li key={item} className="flex gap-3 text-sm leading-relaxed">
@@ -49,9 +49,9 @@ export default function AdmissionsPage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface">
+      <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="text-2xl font-bold tracking-tight">전형 절차</h2>
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">전형 절차</h2>
           <ol className="mt-8 grid gap-4 md:grid-cols-5">
             {ADMISSIONS.steps.map((step) => (
               <li
@@ -72,7 +72,7 @@ export default function AdmissionsPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-bold tracking-tight">모집 일정</h2>
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">모집 일정</h2>
         <table className="mt-8 w-full border-collapse text-left text-sm">
           <caption className="sr-only">1학기 기준 모집 일정</caption>
           <thead>
@@ -106,9 +106,9 @@ export default function AdmissionsPage() {
         <p className="mt-4 text-xs text-muted">{ADMISSIONS.scheduleNotice}</p>
       </section>
 
-      <section className="border-t border-border bg-surface">
+      <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="text-2xl font-bold tracking-tight">장학 제도</h2>
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">장학 제도</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {ADMISSIONS.scholarships.map((scholarship) => (
               <div

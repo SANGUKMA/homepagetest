@@ -27,7 +27,7 @@ export default async function LoginPage() {
       <div className="w-full max-w-sm">
         <div className="text-center">
           <p className="text-sm font-semibold text-brand">{SITE.name}</p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight">
+          <h1 className="mt-2 font-display text-2xl font-bold text-ink">
             {LOGIN.title}
           </h1>
           <p className="mt-3 text-sm text-muted">{LOGIN.description}</p>

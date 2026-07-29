@@ -9,7 +9,7 @@ export function AdminHeader({ email }: { email: string | null }) {
   return (
     <header className="border-b border-border bg-surface">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6">
-        <Link href="/admin" className="font-bold tracking-tight">
+        <Link href="/admin" className="font-display font-bold">
           {SITE.shortName} <span className="text-muted">·</span> {ADMIN.title}
         </Link>
 

@@ -40,7 +40,7 @@ export default async function InquiryDetailPage({ params }: PageProps) {
       </Link>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <h1 className="font-display text-2xl font-bold text-ink">
           {ADMIN.detail.title}
         </h1>
         <InquiryStatusBadge status={inquiry.status} />

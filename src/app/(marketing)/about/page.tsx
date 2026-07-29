@@ -17,7 +17,7 @@ export default function AboutPage() {
       <PageHeader title={ABOUT.title} description={ABOUT.description} />
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-bold tracking-tight">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
           {ABOUT.mission.title}
         </h2>
         <div className="mt-6 max-w-3xl space-y-4">
@@ -29,9 +29,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface">
+      <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="text-2xl font-bold tracking-tight">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
             {ABOUT.partnership.title}
           </h2>
           <p className="mt-3 max-w-3xl text-muted">
@@ -54,7 +54,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-bold tracking-tight">
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
           {ABOUT.vision.title}
         </h2>
         <ol className="mt-8 space-y-6 border-l border-border pl-6">
@@ -72,9 +72,9 @@ export default function AboutPage() {
         </ol>
       </section>
 
-      <section className="border-t border-border bg-surface">
+      <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="text-2xl font-bold tracking-tight">
+          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
             {ABOUT.location.title}
           </h2>
           <p className="mt-3 max-w-3xl text-muted">
