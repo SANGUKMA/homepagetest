@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { LEGAL_NAV, MAIN_NAV, SITE } from '@/lib/content/site'
+import { ADMIN_ENTRY, LEGAL_NAV, MAIN_NAV, SITE } from '@/lib/content/site'
 
 /** 공개 사이트 공통 푸터. 기관 정보와 법적 고지 링크를 담는다. */
 export function SiteFooter() {
@@ -75,6 +75,14 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href={ADMIN_ENTRY.href}
+                className="text-muted/70 hover:text-foreground"
+              >
+                {ADMIN_ENTRY.label}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

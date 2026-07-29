@@ -53,3 +53,11 @@ export const LEGAL_NAV: NavItem[] = [
   { href: '/privacy', label: '개인정보처리방침' },
   { href: '/terms', label: '이용약관' },
 ]
+
+/**
+ * 관리자 진입점. 푸터 맨 끝에 눈에 띄지 않게 둔다.
+ *
+ * 방문자에게 필요한 링크가 아니라 헤더나 주요 메뉴에는 넣지 않는다.
+ * 링크가 있어도 `/admin` 은 인증 가드와 RLS 로 막혀 있다.
+ */
+export const ADMIN_ENTRY: NavItem = { href: '/login', label: '관리자' }
