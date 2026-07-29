@@ -8,8 +8,9 @@
 | 범위 | Phase 1 · 홈페이지 |
 | 1차 목표 | 문의 접수 전환 |
 | 기준 문서 | `CLAUDE.md` |
-| 상태 | 설계 · 검토 대기 |
+| 상태 | **설계 확정 — 구현 착수** |
 | 작성일 | 2026-07-16 |
+| 확정일 | 2026-07-23 |
 
 대학 소개와 **입학·과정 문의 접수**를 목표로 하는 1단계 홈페이지의 정보구조, 사용자 흐름, 기술 아키텍처 설계안이다. LMS는 2단계 확장으로 분리하여 이 문서에서는 확장 포인트만 표시한다.
 
@@ -146,11 +147,12 @@ flowchart TD
 
 | 패키지 | 용도 | 구분 |
 |---|---|---|
-| `zod` | 입력 스키마 검증(클라+서버) | 전제 — CLAUDE.md validators 계층 |
-| `@supabase/ssr` | 서버/클라 클라이언트 · 쿠키 세션 | 권장 |
-| `react-hook-form` | 폼 상태·UX | 선택 — 미도입 시 Server Action 단독 |
-| Resend *또는* Supabase 메일 | 관리자 문의 알림 | 선택 — Phase 1 보류 가능 |
-| Honeypot / Cloudflare Turnstile | 스팸 방지 | 선택 — 허니팟은 무의존 |
+| `zod` | 입력 스키마 검증(클라+서버) | ✅ **승인** — M1에서 설치 |
+| `@supabase/ssr` | 서버/클라 클라이언트 · 쿠키 세션 | ✅ **승인** — M1에서 설치 |
+| `react-hook-form` | 폼 상태·UX | ❌ **미도입** — Server Action + `useActionState`로 처리 |
+| Resend *또는* Supabase 메일 | 관리자 문의 알림 | 🔶 기능 포함 확정 · **수단 미승인** — M2에서 제안 |
+| Cloudflare Turnstile | 스팸 방지 | 🔶 기능 포함 확정 · **연동 방식 미승인** — M2에서 제안 |
+| Honeypot | 스팸 방지(무의존) | ✅ 기본 적용 — 추가 패키지 없음 |
 
 ### 데이터 접근 아키텍처 (CLAUDE.md §3·§4)
 
@@ -229,10 +231,14 @@ src/
 
 | 변수 | 노출 | 비고 |
 |---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | CLIENT OK | 공개 허용 |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | CLIENT OK | 공개 허용(RLS로 보호) |
-| `SUPABASE_SERVICE_ROLE_KEY` | SERVER ONLY | `NEXT_PUBLIC_` 금지 |
-| `RESEND_API_KEY` | SERVER ONLY | 알림 도입 시(선택) |
+| `NEXT_PUBLIC_SUPABASE_URL` | CLIENT OK | 공개 허용 · M1 |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | CLIENT OK | 공개 허용(RLS로 보호) · M1 |
+| `SUPABASE_SERVICE_ROLE_KEY` | SERVER ONLY | `NEXT_PUBLIC_` 금지 · M1 |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | CLIENT OK | 위젯 렌더용 공개 키 · M2 |
+| `TURNSTILE_SECRET_KEY` | SERVER ONLY | siteverify 검증용 · M2 |
+| `INQUIRY_NOTIFY_TO` | SERVER ONLY | 알림 수신 주소 · M2 |
+
+> 발송 수단(Resend 등)이 확정되면 해당 API 키를 SERVER ONLY로 추가한다.
 
 `.env*`는 커밋하지 않고 `.env.example`만 커밋한다. 스키마 변경은 대시보드가 아닌 **마이그레이션 파일**로 남긴다.
 
@@ -249,14 +255,17 @@ src/
 
 ---
 
-## 05. 확인 필요 결정사항
+## 05. 결정 사항 (확정 · 2026-07-23)
 
-소장님 확인 후 확정하면 구현 착수 가능하다.
+| 항목 | 결정 | 설계 반영 |
+|---|---|---|
+| 관리자 인증 모델 | **인증자 = 관리자** | §03 RLS 표 그대로 유지(`authenticated` 기준). `profiles` 테이블 없음 |
+| 과정 콘텐츠 관리 | **정적 관리** | `src/lib/content/programs.ts`. `programs` 테이블 미생성 |
+| 문의 알림 이메일 | **포함** | Flow B의 `H` 분기 활성화. 발송 수단은 M2에서 승인 |
+| FAQ·약관 페이지 | **`/faq`·`/terms` 포함** | §01 IA 그대로 유지 |
+| 스팸 방지 | **허니팟 + Turnstile** | 폼에 허니팟 필드 + Turnstile 위젯. 서버에서 둘 다 검증 |
+| 추가 의존성 | **`zod` + `@supabase/ssr`** | `react-hook-form` 미도입 |
 
-1. **KACI×GCU 맥락 확정?** — 확정 시 `CLAUDE.md §1` 제품 표를 갱신하고 카피에 반영한다.
-2. **관리자 인증 모델** — Phase 1은 단일/소수 관리자(인증자=관리자)로 갈지, 처음부터 `profiles.role` 기반으로 갈지.
-3. **문의 알림 이메일** — Phase 1에 포함(Resend 등)할지, 관리자 대시보드 확인만으로 시작할지.
-4. **과정 콘텐츠 관리 방식** — 정적(권장) vs 초기부터 DB. DB로 가면 `programs` 테이블이 Phase 1에 들어와 범위가 넓어진다.
-5. **FAQ·약관 페이지 포함 범위** — `/privacy`는 문의 폼 동의 근거로 **필수**, `/faq`·`/terms`는 선택.
+**잔여 확인** — KACI×GCU 맥락 확정 여부(카피 한정, 구조 불변) · 테스트 전략 · 콘텐츠 원문. 상세는 [`docs/prd.md` §12.2](./prd.md#122-잔여-확인-사항).
 
-> **다음 단계** — 위 5개 결정만 주시면 ① 마이그레이션(`inquiries` + RLS) ② `src/lib` 계층(validators·queries·mutations) ③ 라우트 스캐폴딩 순서로 구현안을 잡는다.
+> **구현 순서** — ① 마이그레이션(`inquiries` + RLS) ② `src/lib` 계층(supabase·validators·queries·mutations) ③ 공개 라우트·문의 폼 ④ 관리자 영역 ⑤ QA·배포.

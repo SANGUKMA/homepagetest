@@ -8,7 +8,8 @@
 - **Next.js 16** (App Router)
 - **TypeScript** (`strict: true`)
 - **Tailwind CSS v4**
-- (예정) Supabase (Postgres + Auth), Vercel 배포
+- (M1 예정) Supabase (Postgres + Auth) · `zod` · `@supabase/ssr`
+- (M4 예정) Vercel 배포
 
 ## 요구사항
 
@@ -20,7 +21,7 @@
 # 1) 의존성 설치
 npm install
 
-# 2) 환경 변수 준비 (현재 스캐폴드에서는 미사용, Phase 2 대비)
+# 2) 환경 변수 준비 (Supabase 연동은 M1부터 필요)
 cp .env.example .env.local
 
 # 3) 개발 서버 실행 → http://localhost:3000
