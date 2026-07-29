@@ -150,8 +150,8 @@ flowchart TD
 | `zod` | 입력 스키마 검증(클라+서버) | ✅ **승인** — M1에서 설치 |
 | `@supabase/ssr` | 서버/클라 클라이언트 · 쿠키 세션 | ✅ **승인** — M1에서 설치 |
 | `react-hook-form` | 폼 상태·UX | ❌ **미도입** — Server Action + `useActionState`로 처리 |
-| Resend *또는* Supabase 메일 | 관리자 문의 알림 | 🔶 기능 포함 확정 · **수단 미승인** — M2에서 제안 |
-| Cloudflare Turnstile | 스팸 방지 | 🔶 기능 포함 확정 · **연동 방식 미승인** — M2에서 제안 |
+| Resend (HTTP API) | 관리자 문의 알림 | ✅ **승인** — M2. SDK 미도입, `fetch` 로 REST 직접 호출(패키지 추가 없음) |
+| Cloudflare Turnstile | 스팸 방지 | ✅ **승인** — M2. 공식 스크립트 명시적 렌더링 + siteverify 직접 호출(패키지 추가 없음) |
 | Honeypot | 스팸 방지(무의존) | ✅ 기본 적용 — 추가 패키지 없음 |
 
 ### 데이터 접근 아키텍처 (CLAUDE.md §3·§4)
@@ -234,11 +234,14 @@ src/
 | `NEXT_PUBLIC_SUPABASE_URL` | CLIENT OK | 공개 허용 · M1 |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | CLIENT OK | 공개 허용(RLS로 보호) · M1 |
 | `SUPABASE_SERVICE_ROLE_KEY` | SERVER ONLY | `NEXT_PUBLIC_` 금지 · M1 |
+| `NEXT_PUBLIC_SITE_URL` | CLIENT OK | 메타데이터·sitemap 기준 URL · M2 |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | CLIENT OK | 위젯 렌더용 공개 키 · M2 |
 | `TURNSTILE_SECRET_KEY` | SERVER ONLY | siteverify 검증용 · M2 |
-| `INQUIRY_NOTIFY_TO` | SERVER ONLY | 알림 수신 주소 · M2 |
+| `RESEND_API_KEY` | SERVER ONLY | 알림 메일 발송용 · M2 |
+| `INQUIRY_NOTIFY_FROM` | SERVER ONLY | 알림 발신 주소 · M2 |
+| `INQUIRY_NOTIFY_TO` | SERVER ONLY | 알림 수신 주소(쉼표 구분) · M2 |
 
-> 발송 수단(Resend 등)이 확정되면 해당 API 키를 SERVER ONLY로 추가한다.
+> Turnstile 키가 없으면 위젯을 띄우지 않고 서버 검증도 건너뛴다(로컬 개발). 메일 키가 없으면 발송만 건너뛰고 접수는 정상 처리한다. 운영 환경에서는 모두 설정한다.
 
 `.env*`는 커밋하지 않고 `.env.example`만 커밋한다. 스키마 변경은 대시보드가 아닌 **마이그레이션 파일**로 남긴다.
 

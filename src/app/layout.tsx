@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
+import { SITE, getSiteUrl } from "@/lib/content/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,9 +14,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+/**
+ * 페이지별 메타는 각 page.tsx 가 `title` 만 지정하면 아래 template 이 붙는다
+ * (PRD §9 SEO).
+ */
 export const metadata: Metadata = {
-  title: "온라인 대학 | 입학·과정 안내",
-  description: "AI융합 학위과정 소개와 입학·과정 문의 접수",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: `${SITE.name} | ${SITE.tagline}`,
+    template: `%s | ${SITE.name}`,
+  },
+  description: SITE.description,
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: SITE.name,
+    title: `${SITE.name} | ${SITE.tagline}`,
+    description: SITE.description,
+  },
 };
 
 export default function RootLayout({

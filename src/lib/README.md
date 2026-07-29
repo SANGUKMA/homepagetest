@@ -9,7 +9,9 @@ CLAUDE.md §4 규칙: **모든 DB/외부 API 접근은 이 계층을 통해서�
 | `queries/` | 읽기 | `inquiries.ts` — `listInquiries` · `getInquiry` |
 | `mutations/` | 쓰기 | `inquiries.ts` — `createInquiry` · `updateInquiryStatus` |
 | `validators/` | zod 스키마 (입력 검증) | `inquiry.ts` |
-| `content/` | 정적 콘텐츠·노출 문자열 (M2에서 추가) | — |
+| `content/` | 정적 콘텐츠·노출 문자열 | `site.ts` · `strings.ts` · `pages.ts` · `programs.ts` · `admissions.ts` · `faq.ts` · `legal.ts` · `emails.ts` |
+| `spam/` | 스팸 방지 외부 API | `turnstile.ts` — `getTurnstileSiteKey` · `verifyTurnstileToken` |
+| `email/` | 알림 메일 발송 외부 API | `inquiry-notification.ts` — `sendInquiryNotification` |
 
 각 함수는 입력을 zod로 검증하고 결과를 명시적 타입으로 반환한다.
 
