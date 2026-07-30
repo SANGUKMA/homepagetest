@@ -35,7 +35,7 @@ export async function createSupabaseServerClient() {
           }
         } catch {
           // Server Component 에서는 쿠키를 쓸 수 없다.
-          // 세션 갱신은 middleware 가 담당하므로 여기서는 무시해도 안전하다.
+          // 세션 갱신은 proxy 가 담당하므로 여기서는 무시해도 안전하다.
         }
       },
     },

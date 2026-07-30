@@ -5,7 +5,7 @@ CLAUDE.md §4 규칙: **모든 DB/외부 API 접근은 이 계층을 통해서�
 
 | 디렉터리 | 역할 | 현재 파일 |
 |---|---|---|
-| `supabase/` | 클라이언트 생성, 생성된 `Database` 타입 | `server.ts` · `client.ts` · `middleware.ts` · `env.ts` · `database.types.ts` |
+| `supabase/` | 클라이언트 생성, 생성된 `Database` 타입 | `server.ts` · `client.ts` · `proxy.ts` · `env.ts` · `database.types.ts` |
 | `queries/` | 읽기 | `inquiries.ts` — `listInquiries` · `getInquiry` <br> `auth.ts` — `getCurrentUser` |
 | `mutations/` | 쓰기 | `inquiries.ts` — `createInquiry` · `updateInquiryStatus` <br> `auth.ts` — `signIn` · `signOut` |
 | `validators/` | zod 스키마 (입력 검증) | `inquiry.ts` · `auth.ts` |

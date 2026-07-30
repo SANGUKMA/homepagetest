@@ -5,10 +5,10 @@ import type { Database } from './database.types'
 import { getSupabaseEnv } from './env'
 
 /**
- * 미들웨어용 Supabase 클라이언트.
+ * 프록시용 Supabase 클라이언트 (`src/proxy.ts`).
  *
  * Server Component 에서는 쿠키를 쓸 수 없어(`server.ts` 참고) 만료된 액세스 토큰을
- * 갱신해도 저장할 방법이 없다. 그래서 갱신은 미들웨어가 맡는다.
+ * 갱신해도 저장할 방법이 없다. 그래서 갱신은 프록시가 맡는다.
  * `getUser()` 호출이 필요하면 토큰을 갱신하고, 갱신된 쿠키를 응답에 실어 보낸다.
  *
  * 반환한 응답을 그대로 돌려주어야 한다. 새 응답 객체를 만들면 갱신된 쿠키가
