@@ -213,7 +213,15 @@ LMS(수강·강의·평가)는 2단계로 분리한다. `CLAUDE.md` 규칙에 �
 | 3 | 약관·개인정보처리방침 | **법무 검토 전 초안** | 화면에도 초안 표시가 나간다. 검토본으로 교체 |
 | 4 | 과정·입학·FAQ 카피 | 플레이스홀더 | 원문 확보 후 `src/lib/content` 교체 (구조 변경 없음) |
 | 5 | Preview 전용 Supabase | 미분리 | Preview 테스트 문의가 운영 데이터에 섞인다 |
-| 6 | `middleware` → `proxy` | Next 16 deprecation 경고 | 동작에는 문제 없음. 옮길 때 세션 갱신 회귀 확인 필요 |
+
+**마감 이후 닫은 항목**
+
+- `middleware` → `proxy` 이전 — **완료 (2026-07-30)**. `src/middleware.ts` → `src/proxy.ts`,
+  `src/lib/supabase/middleware.ts` → `src/lib/supabase/proxy.ts`. Next 16 deprecation 경고가 사라졌고
+  matcher(`/admin/:path*`·`/login`) 정규식은 이전과 byte 단위로 동일하다.
+  **주의** — Next 16.2 는 프록시에서도 matcher 를 `config` 로 읽는다. `proxyConfig` 로 바꾸면
+  경고 없이 matcher 가 전체 경로로 확대되어 공개 페이지마다 세션 조회가 붙는다.
+  부수 효과로 실행 런타임이 edge → nodejs 로 바뀌었다(Next 16 프록시 기본값).
 
 ---
 
